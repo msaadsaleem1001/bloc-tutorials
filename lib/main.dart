@@ -1,10 +1,14 @@
 import 'package:bloc_tutorials/Bloc/Counter%20Bloc/counter_bloc.dart';
 import 'package:bloc_tutorials/Bloc/Image%20Picker%20Bloc/image_picker_bloc.dart';
 import 'package:bloc_tutorials/Bloc/Switch%20Bloc/switch_bloc.dart';
-import 'package:bloc_tutorials/UI/Image%20Picker%20Screen/image_picker_screen.dart';
+import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_bloc.dart';
+import 'package:bloc_tutorials/UI/Fav%20Screen/fav_screen.dart';
 import 'package:bloc_tutorials/Utils/Image%20Picker%20Utils/image_picker_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'Bloc/Fav Bloc/fav_bloc.dart';
+import 'Repositories/Fav Repository/fav_repo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +24,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_)=> CounterBloc()),
         BlocProvider(create: (_)=> SwitchBloc()),
         BlocProvider(create: (_)=> ImagePickerBloc(ImagePickerUtils())),
+        BlocProvider(create: (_)=> TodoBloc()),
+        BlocProvider(create: (_)=> FavBloc(FavRepository())),
       ],
       child: MaterialApp(
           title: 'Bloc Tutorials',
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const ImagePickerScreen()
+          home: const FavScreen()
       ),
     );
   }
