@@ -41,6 +41,10 @@ dependencies:
   flutter_bloc: ^8.1.3
   image_picker: ^1.0.7
 
+  #Following dependencies for task assigned
+  drag_and_drop_lists: ^0.3.3
+  pulsator: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

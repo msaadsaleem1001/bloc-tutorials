@@ -1,4 +1,5 @@
 
+import 'package:bloc_tutorials/App%20Models/ToDo%20Model/todo_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TodoEvent extends Equatable{
@@ -11,12 +12,12 @@ abstract class TodoEvent extends Equatable{
 }
 
 class AddTodoEvent extends TodoEvent{
-  final String todo;
+  final ToDoModel todoItem;
 
-  const AddTodoEvent({required this.todo});
+  const AddTodoEvent({required this.todoItem});
 
   @override
-  List<Object?> get props => [todo];
+  List<Object?> get props => [todoItem];
 
 }
 
