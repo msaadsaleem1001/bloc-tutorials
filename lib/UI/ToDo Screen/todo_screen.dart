@@ -3,7 +3,7 @@ import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_event.dart';
 import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_state.dart';
 import 'package:bloc_tutorials/Utils/App%20Colors/app_colors.dart';
 import 'package:bloc_tutorials/Utils/Textstyles/text_styles.dart';
-import 'package:bloc_tutorials/Utils/Utils/modal.dart';
+import 'package:bloc_tutorials/Utils/Utils/dialog_box.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

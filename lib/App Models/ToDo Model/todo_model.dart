@@ -5,13 +5,13 @@ import 'package:equatable/equatable.dart';
 
 class ToDoModel extends Equatable{
 
-  final int id;
+  final int? id;
   final String title;
   final String desc;
   final TodoStatus status;
 
   const ToDoModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.desc,
     this.status = TodoStatus.inActive
@@ -24,6 +24,23 @@ class ToDoModel extends Equatable{
         desc: desc ?? this.desc,
         status: status ?? this.status
     );
+  }
+
+  factory ToDoModel.fromJson(Map<String, dynamic> map) {
+    return ToDoModel(
+      id: map['id'],
+      title: map['title'],
+      desc: map['description'],
+      status: map['status'],
+    );
+  }
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': desc,
+      'status': status,
+    };
   }
 
 

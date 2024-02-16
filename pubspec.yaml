@@ -44,6 +44,7 @@ dependencies:
   #Following dependencies for task assigned
   drag_and_drop_lists: ^0.3.3
   pulsator: ^1.0.0
+  sqflite: ^2.3.2
 
 dev_dependencies:
   flutter_test:
