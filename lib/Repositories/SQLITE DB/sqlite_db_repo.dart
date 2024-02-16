@@ -39,7 +39,7 @@ class DatabaseRepository {
     await db.insert(AppConst.tableName, todo.toMap());
   }
 
-  Future<void> delete(int id) async {
+  Future<void> delete(int? id) async {
     try {
       final db = await instance.database;
       await db.delete(

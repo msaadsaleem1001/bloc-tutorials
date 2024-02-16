@@ -1,3 +1,4 @@
+
 import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_bloc.dart';
 import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_event.dart';
 import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_state.dart';
@@ -96,7 +97,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
           )),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           child: BlocBuilder<TodoBloc, TodoState>(
             builder: (context, state) {
               return DragAndDropLists(

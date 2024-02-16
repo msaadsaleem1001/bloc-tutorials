@@ -154,7 +154,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   }
 
   void _deleteToDoEvent(DeleteToDoEvent event, Emitter<TodoState> emit) async{
-    await db.delete(event.todoItem.id!).then((value) {
+    await db.delete(event.todoId).then((value) {
       if(event.listIndex == 0){
         toDoInActive.removeAt(event.itemIndex);
         emit(state.copyWith(toDoInActive: List.from(toDoInActive)));

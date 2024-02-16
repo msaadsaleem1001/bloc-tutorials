@@ -67,13 +67,13 @@ class UpdateEvent extends TodoEvent{
 }
 
 class DeleteToDoEvent extends TodoEvent{
-  final ToDoModel todoItem;
+  final int? todoId;
   final int listIndex;
   final int itemIndex;
 
-  const DeleteToDoEvent({required this.todoItem, required this.listIndex, required this.itemIndex});
+  const DeleteToDoEvent({required this.todoId, required this.listIndex, required this.itemIndex});
 
   @override
-  List<Object?> get props => [todoItem, listIndex, itemIndex];
+  List<Object?> get props => [todoId, listIndex, itemIndex];
 
 }

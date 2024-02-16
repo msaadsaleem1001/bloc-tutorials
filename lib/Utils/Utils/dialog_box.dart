@@ -178,7 +178,7 @@ class AppUtils {
                       previous.addTodoInProcess != current.addTodoInProcess,
                   builder: (context, state) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -397,7 +397,7 @@ class AppUtils {
                       previous.addTodoInProcess != current.addTodoInProcess,
                   builder: (context, state) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.only(top: 5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,

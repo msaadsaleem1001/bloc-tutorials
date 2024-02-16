@@ -39,7 +39,7 @@ class AppPopUpMenu extends StatelessWidget {
             if (val == 0) {
               // Call delete event
               context.read<TodoBloc>().add(DeleteToDoEvent(
-                  todoItem: toDoModel,
+                  todoId: toDoModel.id,
                   listIndex: listId,
                   itemIndex: index
               ));
