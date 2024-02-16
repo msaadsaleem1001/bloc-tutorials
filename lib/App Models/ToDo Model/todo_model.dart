@@ -1,6 +1,4 @@
 
-
-import 'package:bloc_tutorials/App%20Models/ToDo%20Model/todo_status.dart';
 import 'package:equatable/equatable.dart';
 
 class ToDoModel extends Equatable{
@@ -8,16 +6,16 @@ class ToDoModel extends Equatable{
   final int? id;
   final String title;
   final String desc;
-  final TodoStatus status;
+  final String status;
 
   const ToDoModel({
     this.id,
     required this.title,
     required this.desc,
-    this.status = TodoStatus.inActive
+    required this.status
   });
 
-  ToDoModel copyWith({int? id, String? title, String? desc, TodoStatus? status}){
+  ToDoModel copyWith({int? id, String? title, String? desc, String? status}){
     return ToDoModel(
         id: id ?? this.id,
         title: title ?? this.title,

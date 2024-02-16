@@ -4,6 +4,7 @@ import 'package:bloc_tutorials/Bloc/Todo%20Bloc/todo_state.dart';
 import 'package:bloc_tutorials/Utils/App%20Colors/app_colors.dart';
 import 'package:bloc_tutorials/Utils/Textstyles/text_styles.dart';
 import 'package:bloc_tutorials/Utils/Utils/dialog_box.dart';
+import 'package:bloc_tutorials/Utils/Widgets/pop_up_menu.dart';
 import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,13 @@ class ToDoScreen extends StatefulWidget {
 }
 
 class _ToDoScreenState extends State<ToDoScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<TodoBloc>().add(const GetAllToDos());
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width * 1;
@@ -73,10 +81,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Task Manager',
-                style: AppTextStyles.headerStyle()
-              ),
+              Text('Task Manager', style: AppTextStyles.headerStyle()),
               const Spacer(),
               const CircleAvatar(
                 radius: 20,
@@ -95,56 +100,62 @@ class _ToDoScreenState extends State<ToDoScreen> {
           child: BlocBuilder<TodoBloc, TodoState>(
             builder: (context, state) {
               return DragAndDropLists(
+                lastItemTargetHeight: 150,
                 children: [
                   DragAndDropList(
-                    canDrag: false,
-                    header: Text('ToDo\'s', style: AppTextStyles.headerStyle(fontSize: 20)),
-                    contentsWhenEmpty: Center(child: Text('Have not ToDo\'yet, Add some.', style: AppTextStyles.emptyStyle())),
-                    footer: const SizedBox(height: 20),
-                      children: List.generate(state.toDoInActive.length, (index) {
-                    return DragAndDropItem(
-                      canDrag: true,
-                        child: Container(
-                      margin: EdgeInsets.symmetric(vertical: height * .01),
-                      width: width * .9,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: AppColors.borderColor,
-                          style: BorderStyle.solid,
-                          strokeAlign: BorderSide.strokeAlignInside,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.event_note_rounded,
-                          size: 30,
-                          color: AppColors.textColor,
-                        ),
-                        title: Text(state.toDoInActive[index].title,
-                            style: const TextStyle(color: AppColors.textColor)),
-                        subtitle: Text(state.toDoInActive[index].desc,
-                            style: const TextStyle(color: AppColors.textColor)),
-                        trailing: IconButton(
-                          enableFeedback: false,
-                          onPressed: () {},
-                          icon: const Icon(Icons.more_vert_rounded,
-                              size: 30, color: AppColors.textColor),
-                        ),
-                      ),
-                    ));
-                  })),
+                      canDrag: false,
+                      header: Text('ToDo\'s',
+                          style: AppTextStyles.headerStyle(fontSize: 20)),
+                      contentsWhenEmpty: Center(
+                          child: Text('Have not ToDo\'yet, Add some.',
+                              style: AppTextStyles.emptyStyle())),
+                      children:
+                          List.generate(state.toDoInActive.length, (index) {
+                        return DragAndDropItem(
+                            canDrag: true,
+                            child: Container(
+                              margin:
+                                  EdgeInsets.symmetric(vertical: height * .01),
+                              width: width * .9,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: AppColors.borderColor,
+                                  style: BorderStyle.solid,
+                                  strokeAlign: BorderSide.strokeAlignInside,
+                                  width: 1.5,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ListTile(
+                                leading: const Icon(
+                                  Icons.event_note_rounded,
+                                  size: 30,
+                                  color: AppColors.textColor,
+                                ),
+                                title: Text(state.toDoInActive[index].title,
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
+                                subtitle: Text(state.toDoInActive[index].desc,
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
+                                trailing: AppPopUpMenu(listId: 0, index: index, toDoModel: state.toDoInActive[index]),
+                              ),
+                            ));
+                      })),
                   DragAndDropList(
                       canDrag: false,
-                      header: Text('In Process', style: AppTextStyles.headerStyle(fontSize: 20)),
-                      contentsWhenEmpty: Center(child: Text('Have not ToDo\'s in process yet.', style: AppTextStyles.emptyStyle())),
-                      footer: const SizedBox(height: 20),
-                      children: List.generate(state.toDoInProcess.length, (index) {
+                      header: Text('In Process',
+                          style: AppTextStyles.headerStyle(fontSize: 20)),
+                      contentsWhenEmpty: Center(
+                          child: Text('Have not ToDo\'s in process yet.',
+                              style: AppTextStyles.emptyStyle())),
+                      children:
+                          List.generate(state.toDoInProcess.length, (index) {
                         return DragAndDropItem(
-                          canDrag: true,
+                            canDrag: true,
                             child: Container(
-                              margin: EdgeInsets.symmetric(vertical: height * .01),
+                              margin:
+                                  EdgeInsets.symmetric(vertical: height * .01),
                               width: width * .9,
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -162,28 +173,29 @@ class _ToDoScreenState extends State<ToDoScreen> {
                                   color: AppColors.textColor,
                                 ),
                                 title: Text(state.toDoInProcess[index].title,
-                                    style: const TextStyle(color: AppColors.textColor)),
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
                                 subtitle: Text(state.toDoInProcess[index].desc,
-                                    style: const TextStyle(color: AppColors.textColor)),
-                                trailing: IconButton(
-                                  enableFeedback: false,
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.more_vert_rounded,
-                                      size: 30, color: AppColors.textColor),
-                                ),
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
+                                trailing: AppPopUpMenu(listId: 1, index: index, toDoModel: state.toDoInProcess[index]),
                               ),
                             ));
                       })),
                   DragAndDropList(
-                    canDrag: false,
-                      header: Text('Completed', style: AppTextStyles.headerStyle(fontSize: 20)),
-                      contentsWhenEmpty: Center(child: Text('Have not completed ToDo\'yet.', style: AppTextStyles.emptyStyle())),
-                      footer: const SizedBox(height: 20),
-                      children: List.generate(state.toDoCompleted.length, (index) {
+                      canDrag: false,
+                      header: Text('Completed',
+                          style: AppTextStyles.headerStyle(fontSize: 20)),
+                      contentsWhenEmpty: Center(
+                          child: Text('Have not completed ToDo\'yet.',
+                              style: AppTextStyles.emptyStyle())),
+                      children:
+                          List.generate(state.toDoCompleted.length, (index) {
                         return DragAndDropItem(
                             canDrag: false,
                             child: Container(
-                              margin: EdgeInsets.symmetric(vertical: height * .01),
+                              margin:
+                                  EdgeInsets.symmetric(vertical: height * .01),
                               width: width * .9,
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -201,25 +213,23 @@ class _ToDoScreenState extends State<ToDoScreen> {
                                   color: AppColors.textColor,
                                 ),
                                 title: Text(state.toDoCompleted[index].title,
-                                    style: const TextStyle(color: AppColors.textColor)),
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
                                 subtitle: Text(state.toDoCompleted[index].desc,
-                                    style: const TextStyle(color: AppColors.textColor)),
-                                trailing: IconButton(
-                                  enableFeedback: false,
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.more_vert_rounded,
-                                      size: 30, color: AppColors.textColor),
-                                ),
+                                    style: const TextStyle(
+                                        color: AppColors.textColor)),
+                                trailing: AppPopUpMenu(listId: 2, index: index, toDoModel: state.toDoCompleted[index]),
                               ),
                             ));
                       })),
                 ],
                 onItemReorder: (int oldItemIndex, int oldListIndex,
                     int newItemIndex, int newListIndex) {
-                  debugPrint('OldItemIndex $oldItemIndex');
-                  debugPrint('OldListIndex $oldListIndex');
-                  debugPrint('NewItemIndex $newItemIndex');
-                  debugPrint('NewListIndex $newListIndex');
+                  context.read<TodoBloc>().add(OnDragEvent(
+                      oldItemIndex: oldItemIndex,
+                      oldListIndex: oldListIndex,
+                      newItemIndex: newItemIndex,
+                      newListIndex: newListIndex));
                 },
                 onListReorder: (int oldListIndex, int newListIndex) {},
               );

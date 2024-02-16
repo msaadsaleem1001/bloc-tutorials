@@ -8,12 +8,14 @@ class TodoState extends Equatable{
   final List<ToDoModel> toDoInProcess;
   final List<ToDoModel> toDoCompleted;
   final bool addTodoInProcess;
+  final List<String> popUpMenu;
 
   const TodoState({
     this.toDoInActive = const [],
     this.toDoInProcess = const [],
     this.toDoCompleted = const [],
-    this.addTodoInProcess = false
+    this.addTodoInProcess = false,
+    this.popUpMenu = const ['Delete', 'Edit']
   });
 
   TodoState copyWith ({
